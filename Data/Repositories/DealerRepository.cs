@@ -43,7 +43,8 @@ namespace Data.Repositories
                           {
                               Id = dealer.Id,
                               Name = dealer.Name,
-                              Status = dealer.Status
+                              Status = dealer.Status,
+                              CityName = dealer.City.Name,
                           }).FirstOrDefault();
             return data;
         }
