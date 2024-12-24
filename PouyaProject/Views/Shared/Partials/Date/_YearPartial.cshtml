@@ -1,0 +1,6 @@
+﻿@using System.Globalization
+@{
+    PersianCalendar persianCalendar = new PersianCalendar();
+    int persianYear = persianCalendar.GetYear(DateTime.Now);
+}
+<span>@persianYear</span> 

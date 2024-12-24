@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "صفحه اصلی فروشندگان";
+}
+
+
+@{
+    ViewBag.Title = "صفحه خانگی شهر";
+}
+
+<div id="operation-box" class="modal fade" role="dialog" aria-hidden="true">
+</div>
+
+<div class="d-flex">
+    <button class="btn btn-primary text-white  p-2  mb-3 mx-1" id="createBtn">
+        افزودن
+    </button>
+    <a class="btn btn-primary text-white p-2  mb-3" href="/">
+        بازگشت
+    </a>
+</div>
+
+<div class="btn btn-outline-primary btn-sm  my-2 mx-1">لیست فروشندگان</div>
+
+<div class="card p-2" id="tbl">
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        var _createDealerUrl = '@Url.Action("Create", "Dealer")';
+        var _getDealerUrl = '@Url.Action("GetDealers", "Dealer")';
+        var _deleteDealerUrl = '@Url.Action("Delete", "Dealer")';
+        var _updateDealerUrl = '@Url.Action("Update", "Dealer")';
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetDealers();
+        });
+
+        function GetDealers() {
+            $.get(_getDealerUrl).done(function (result) {
+                $("#tbl").html(result);
+            })
+        }
+
+        function CallDelete(dealerId) {
+            var id = dealerId;
+            $("#deleteBtn").prop('disabled', true);
+            $.get(_deleteDealerUrl, { id: id })
+                .done(function (result) {
+                    $("#operation-box").html(result);
+                    $("#operation-box").modal("show");
+                });
+        }
+
+        function CallUpdate(dealerId) {
+            var id = dealerId;
+            $("#updateBtn").prop('disabled', true);
+            $.get(_updateDealerUrl, { id: id })
+                .done(function (result) {
+                    $("#operation-box").html(result);
+                    $("#operation-box").modal("show");
+                });
+        }
+
+        $("#createBtn").off("click").on("click", function (e) {
+            e.preventDefault();
+            $.get(_createDealerUrl).done(function (result) {
+                $("#operation-box").html(result);
+                $("#operation-box").modal("show");
+            });
+        });
+
+
+
+
+    </script>
+}
+
+

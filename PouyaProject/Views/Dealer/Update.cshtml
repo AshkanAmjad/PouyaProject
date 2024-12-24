@@ -1,0 +1,90 @@
+﻿@model Domain.ViewModels.Dealer.DisplayDealerByIdVM
+@{
+    var statues = ViewBag.Statues != null
+    ? ViewBag.Statues as List<SelectListItem>
+    : new List<SelectListItem>();
+
+}
+
+<div class="modal-dialog modal-xl " id="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">
+                <div class="btn btn-outline-primary btn-sm  my-2 mx-1">ویرایش</div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="border border-top-0 ">
+            <p class="fs-6 mt-3 fw-bold pe-4">
+                درصورت ویرایش، مشخصات فروشنده را در ورودی های مربوطه وارد کنید.
+            </p>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("Update", "Dealer", FormMethod.Post, new { id = "updateForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(p => p.Id);
+
+                <div class="row mt-2 p-0 ">
+                    <div class="col-4 col-lg-3">
+                        <label>عنوان :</label>
+                    </div>
+                    <div class="col-8 col-lg-9">
+                        @Html.TextBoxFor(p => p.Name, new { @class = "form-control", @placeholder = "عنوان مناسبی انتخاب کنید" })
+                        @Html.ValidationMessageFor(p => p.Name, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row mt-2 p-0 ">
+                    <div class="col-4 col-lg-3">
+                        <label>وضعیت :</label>
+                    </div>
+                    <div class="col-8 col-lg-9">
+                        @Html.DropDownListFor(d => d.Status, statues, new { @class = "form-control" })
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="modal-footer d-flex justify-content-center align-items-center mt-lg-5">
+            <button type="submit" class="btn btn-primary px-5 align-items-center" id="submitBtn" tabindex="4">
+                ثبت
+            </button>
+            <button type="button" class="btn btn-secondary cursor-pointer mx-1" tabindex="5" data-bs-dismiss="modal">
+                &times;
+            </button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+        var _updateUrl = '@Url.Action("Update", "Dealer")';
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#submitBtn").off("click");
+        $("#submitBtn").on("click", function (e) {
+            e.preventDefault();
+            var $form = $('#updateForm');
+            $.validator.unobtrusive.parse($form);
+            if ($form.valid()) {
+                $("#submitBtn").prop('disabled', true);
+                var data = $form.serialize();
+                $.post(_updateUrl, data)
+                    .done(function (result) {
+                        if (result.success) {
+                            $("#operation-box").modal("toggle");
+                            alert(result.message);
+                            GetDealers();
+                        } else {
+                            alert(result.message);
+                        }
+                    })
+                    .always(function () {
+                        $("#submitBtn").prop('disabled', false);
+                    });
+            }
+
+        });
+    });
+</script>

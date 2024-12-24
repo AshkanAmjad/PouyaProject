@@ -1,0 +1,67 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@font-face {
+    font-family: 'koodak';
+    src: url('../fonts/custom/KoodakBold.eot'), url('../fonts/custom/KoodakBold.ttf')format('truetype'), url('../fonts/custom/KoodakBold.woff')format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nazanin';
+    src: url('../fonts/custom/Nazanin.eot')format('eot'), url('../fonts/custom/Nazanin.ttf')format('truetype'), url('../fonts/custom/Nazanin.woff')format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'yekan';
+    src: url('../fonts/custom/Yekan.eot')format('eot'), url('../fonts/custom/Yekan.ttf')format('truetype'), url('../fonts/custom/Yekan.woff')format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+*{
+    font-family: yekan !important;
+}
+
+.operation-btns {
+    width: 5rem
+}
+
+.dir-rtl {
+    direction: rtl !important;
+}
+
+.fs-6 {
+    font-size: 0.8rem !important;
+}
+
+.btn-close {
+    cursor: pointer;
+    color: red;
+    position: absolute;
+    left: 10px;
+}
+
+.w-90 {
+    width: 90%;
+}
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}

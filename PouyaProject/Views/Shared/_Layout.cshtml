@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+<body class="dir-rtl">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("پویا", "Index", "Home", new { area = "" }, new { @class = "navbar-brand w-100 text-center" })
+        </div>
+    </nav>
+    <div class="body-content w-100">
+        @RenderBody()
+    </div>
+    <hr />
+    <footer>
+        <p>&copy; @Html.Partial("~/Views/Shared/Partials/Date/_YearPartial.cshtml") - پویا
+    </footer>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

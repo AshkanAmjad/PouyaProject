@@ -1,0 +1,43 @@
+﻿@model List<Domain.ViewModels.Dealer.DisplayDealerVM>
+<div class="table-responsive px-1">
+    <table class="table table-bordered table-striped text-center p-0 m-0">
+        <thead>
+            <tr>
+                <th>کد</th>
+                <th>شماره فروشنده</th>
+                <th>عنوان</th>
+                <th>شهر</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Code</td>
+                    <td>@item.DealorNo</td>
+                    <td>@item.Name</td>
+                    <td>@item.CityName</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-outline-warning btn-sm operation-btns mx-2" onclick="CallParentUpdate('@item.Id')" id="updateBtn">ویرایش</a>
+                            <a class="btn btn-outline-danger btn-sm operation-btns" onclick="CallParentDelete('@item.Id')" id="deleteBtn">حذف</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    function CallParentDelete(cityId) {
+        CallDelete(cityId);
+    }
+
+    function CallParentUpdate(cityId) {
+        CallUpdate(cityId);
+    }
+</script>

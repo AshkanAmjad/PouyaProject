@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "صفحه خانگی شهر";
+}
+
+
+
+
+<div id="operation-box" class="modal fade" role="dialog" aria-hidden="true">
+</div>
+
+<div class="d-flex">
+    <button class="btn btn-primary text-white  p-2  mb-3 mx-1" id="createBtn">
+        افزودن
+    </button>
+    <a class="btn btn-primary text-white p-2  mb-3" href="/">
+        بازگشت
+    </a>
+</div>
+
+<div class="btn btn-outline-primary btn-sm  my-2 mx-1">لیست شهرها</div>
+
+<div class="card p-2" id="tbl">
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        var _createCityUrl = '@Url.Action("Create", "City")';
+        var _getCityUrl = '@Url.Action("GetCities", "City")';
+        var _deleteCityUrl = '@Url.Action("Delete", "City")';
+        var _updateCityUrl = '@Url.Action("Update", "City")';
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetCities();
+        });
+
+        function GetCities() {
+            $.get(_getCityUrl).done(function (result) {
+                $("#tbl").html(result);
+            })
+        }
+
+        function CallDelete(cityId) {
+            var id = cityId;
+            $("#deleteBtn").prop('disabled', true);
+            $.get(_deleteCityUrl, { id: id })
+                .done(function (result) {
+                    $("#operation-box").html(result);
+                    $("#operation-box").modal("show");
+                });
+        }
+
+        function CallUpdate(cityId) {
+            var id = cityId;
+            $("#updateBtn").prop('disabled', true);
+            $.get(_updateCityUrl, { id: id })
+                .done(function (result) {
+                    $("#operation-box").html(result);
+                    $("#operation-box").modal("show");
+                });
+        }
+
+        $("#createBtn").off("click").on("click", function (e) {
+            e.preventDefault();
+            $.get(_createCityUrl).done(function (result) {
+                $("#operation-box").html(result);
+                $("#operation-box").modal("show");
+            });
+        });
+
+
+
+
+    </script>
+}
+
